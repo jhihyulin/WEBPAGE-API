@@ -12,6 +12,7 @@ import datetime
 import os
 import dotenv
 import json
+from fastapi.responses import JSONResponse
 
 from lib.TWUniversityResultQuery import search_with_test_number
 
@@ -82,6 +83,6 @@ def read_contact(data: Contact, X_Firebase_AppCheck: str = Header(None)):
 @app.get('/TWUniversityResultQuery')
 def read_TWUniversityResultQuery(id: str, X_Firebase_AppCheck: str = Header(None)):
     if check(X_Firebase_AppCheck):
-        return search_with_test_number(id)
+        return JSONResponse(content=search_with_test_number(id))
     else:
         raise HTTPException(status_code=403, detail="Unauthorized")
