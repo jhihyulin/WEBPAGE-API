@@ -89,7 +89,7 @@ def search_with_test_number(id):
     tuli = {}
     if stardata is not None:
         for i in stardata.keys():
-            starli.update({str(i).zfill(6): str(stardata[i])})
+            starli.update({str(i).zfill(5): str(stardata[i])})
     else:
         starli = None
     if udata is not None:
