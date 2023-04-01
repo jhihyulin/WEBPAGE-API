@@ -84,22 +84,22 @@ def search_with_test_number(id):
     tudata = tusearch(int(id))
     stardata = starsearch(int(id)) 
     name = searchname(int(id))
-    data = {}
-    if name is not None:
-        data.update({'姓名': str(name)})
-    if udata is None and tudata is None and stardata is None:
-        data.update({'result': '查無資料'})
+    starli = {}
+    uli = {}
+    tuli = {}
+    if stardata is not None:
+        for i in stardata.keys():
+            starli.update({str(i).zfill(6): str(stardata[i])})
     else:
-        if stardata is not None:
-            data.update({'繁星推薦結果': {}})
-            for i in stardata.keys():
-                data['繁星推薦結果'].update({str(i).zfill(5): str(stardata[i])})
-        if udata is not None:
-            data.update({'大學個人申請第一階段結果': {}})
-            for i in udata.keys():
-                data['大學個人申請第一階段結果'].update({str(i).zfill(6): str(udata[i])})
-        if tudata is not None:
-            data.update({'科大四技申請第一階段結果': {}})
-            for i in tudata.keys():
-                data['科大四技申請第一階段結果'].update({str(i).zfill(6): str(tudata[i])})
-    return data
+        starli = None
+    if udata is not None:
+        for i in udata.keys():
+            uli.update({str(i).zfill(6): str(udata[i])})
+    else:
+        uli = None
+    if tudata is not None:
+        for i in tudata.keys():
+            tuli.update({str(i).zfill(6): str(tudata[i])})
+    else:
+        tuli = None
+    return {'name': name, 'star': starli, 'tu': tuli, 'u': uli}
