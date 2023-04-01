@@ -13,6 +13,8 @@ import os
 import dotenv
 import json
 
+from lib.TWUniversityResultQuery import search_with_test_number
+
 dotenv.load_dotenv()
 
 telegramBotToken = os.getenv('TGBOTTOKEN')
@@ -74,5 +76,12 @@ def read_contact(data: Contact, X_Firebase_AppCheck: str = Header(None)):
             return {'success': 'success'}
         else:
             raise HTTPException(status_code=500, detail="Internal Server Error")
+    else:
+        raise HTTPException(status_code=403, detail="Unauthorized")
+
+@app.get('/TWUniversityResultQuery')
+def read_TWUniversityResultQuery(id: str, X_Firebase_AppCheck: str = Header(None)):
+    if check(X_Firebase_AppCheck):
+        return search_with_test_number(id)
     else:
         raise HTTPException(status_code=403, detail="Unauthorized")
