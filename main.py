@@ -81,10 +81,10 @@ def read_contact(data: Contact, X_Firebase_AppCheck: str = Header(None)):
         raise HTTPException(status_code=403, detail="Unauthorized")
 
 @app.get('/TWUniversityResultQuery')
-# def read_TWUniversityResultQuery(id: str, X_Firebase_AppCheck: str = Header(None)):
-#     if check(X_Firebase_AppCheck):
-#         return search_with_test_number(id)
-#     else:
-#         raise HTTPException(status_code=403, detail="Unauthorized")
-def read_TWUniversityResultQuery(id: str):
-    return JSONResponse(content=search_with_test_number(id))
+def read_TWUniversityResultQuery(id: str, X_Firebase_AppCheck: str = Header(None)):
+    if check(X_Firebase_AppCheck):
+        return JSONResponse(content=search_with_test_number(id))
+    else:
+        raise HTTPException(status_code=403, detail="Unauthorized")
+# def read_TWUniversityResultQuery(id: str):
+#     return JSONResponse(content=search_with_test_number(id))
